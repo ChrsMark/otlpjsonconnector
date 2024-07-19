@@ -1,0 +1,17 @@
+dist:
+  name: otelcol-dev-bin
+  description: Basic OpenTelemetry collector distribution for Developers
+  output_path: ./otelcol-dev
+  otelcol_version: 0.105.0
+
+exporters:
+  - gomod: go.opentelemetry.io/collector/exporter/debugexporter v0.105.0
+
+receivers:
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/filelogreceiver v0.105.0
+
+connectors:
+  - gomod: github.com/ChrsMark/otlpjsonconnector v0.105.0
+
+replaces:
+  - github.com/ChrsMark/otlpjsonconnector => /home/chrismark/go/src/github.com/ChrsMark/otlpjsonconnector

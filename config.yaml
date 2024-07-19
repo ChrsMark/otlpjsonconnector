@@ -1,0 +1,20 @@
+receivers:
+  filelog:
+    include:
+      - /var/log/pods/prod_kube-scheduler-kind-control-plane_49cc7c1fd3702c40b2686ea7486091d3/kube-scheduler44/1.log
+
+exporters:
+  debug:
+    verbosity: detailed
+
+connectors:
+  otlpjson:
+
+service:
+  pipelines:
+    logs/raw:
+      receivers: [filelog]
+      exporters: [otlpjson]
+    logs:
+      receivers: [ otlpjson ]
+      exporters: [ debug ]

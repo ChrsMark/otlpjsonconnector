@@ -35,7 +35,7 @@ func newMetricsConnector(ctx context.Context, logger *zap.Logger, config compone
 
 // Capabilities implements the consumer interface.
 func (c *connectorMetrics) Capabilities() consumer.Capabilities {
-	return consumer.Capabilities{MutatesData: true}
+	return consumer.Capabilities{MutatesData: false}
 }
 
 // ConsumeLogs method is called for each instance of a log sent to the connector

@@ -33,7 +33,7 @@ func newLogsConnector(ctx context.Context, logger *zap.Logger, config component.
 
 // Capabilities implements the consumer interface.
 func (c *connectorLogs) Capabilities() consumer.Capabilities {
-	return consumer.Capabilities{MutatesData: true}
+	return consumer.Capabilities{MutatesData: false}
 }
 
 // ConsumeLogs method is called for each instance of a log sent to the connector

@@ -2,7 +2,6 @@ package otlpjsonconnector
 
 import (
 	"context"
-
 	"go.uber.org/zap"
 
 	"go.opentelemetry.io/collector/component"
@@ -11,7 +10,7 @@ import (
 )
 
 // schema for connector
-type connectorImp struct {
+type connectorLogs struct {
 	config       Config
 	logsConsumer consumer.Logs
 	logger       *zap.Logger
@@ -20,12 +19,12 @@ type connectorImp struct {
 	component.ShutdownFunc
 }
 
-// newConnector is a function to create a new connector
-func newLogsConnector(ctx context.Context, logger *zap.Logger, config component.Config, logsConsumer consumer.Logs) (*connectorImp, error) {
-	logger.Info("Building otlpjson connector")
+// newLogsConnector is a function to create a new connector for logs extraction
+func newLogsConnector(ctx context.Context, logger *zap.Logger, config component.Config, logsConsumer consumer.Logs) (*connectorLogs, error) {
+	logger.Info("Building otlpjson connector for logs")
 	cfg := config.(*Config)
 
-	return &connectorImp{
+	return &connectorLogs{
 		config:       *cfg,
 		logger:       logger,
 		logsConsumer: logsConsumer,
@@ -33,12 +32,12 @@ func newLogsConnector(ctx context.Context, logger *zap.Logger, config component.
 }
 
 // Capabilities implements the consumer interface.
-func (c *connectorImp) Capabilities() consumer.Capabilities {
+func (c *connectorLogs) Capabilities() consumer.Capabilities {
 	return consumer.Capabilities{MutatesData: true}
 }
 
-// ConsumeLogs method is called for each instance of a trace sent to the connector
-func (c *connectorImp) ConsumeLogs(ctx context.Context, td plog.Logs) error {
+// ConsumeLogs method is called for each instance of a log sent to the connector
+func (c *connectorLogs) ConsumeLogs(ctx context.Context, td plog.Logs) error {
 	// loop through the levels of logs
 	logsUnmarshaler := &plog.JSONUnmarshaler{}
 	for i := 0; i < td.ResourceLogs().Len(); i++ {

@@ -1,7 +1,7 @@
 receivers:
   filelog:
     include:
-      - /var/log/pods/prod_kube-scheduler-kind-control-plane_49cc7c1fd3702c40b2686ea7486091d3/kube-scheduler44/1.log
+      - /var/log/pods/prod_my-target-pod_49cc7c1fd3702c40b2686ea7486091d3/my-target-pod/1.log
 
 exporters:
   debug:
@@ -15,6 +15,12 @@ service:
     logs/raw:
       receivers: [filelog]
       exporters: [otlpjson]
-    logs:
+    metrics/otlp:
+      receivers: [ otlpjson ]
+      exporters: [ debug ]
+    logs/otlp:
+      receivers: [ otlpjson ]
+      exporters: [ debug ]
+    traces/otlp:
       receivers: [ otlpjson ]
       exporters: [ debug ]

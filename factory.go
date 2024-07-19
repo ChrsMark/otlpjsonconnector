@@ -28,7 +28,7 @@ func createDefaultConfig() component.Config {
 	return &Config{}
 }
 
-// createLogsToTraces defines the consumer type of the connector
+// createLogsConnector defines the consumer type of the connector
 // We want to consume logs and export logs, therefore, define nextConsumer as logs, since consumer is the next component in the pipeline
 func createLogsConnector(
 	ctx context.Context,
@@ -39,8 +39,8 @@ func createLogsConnector(
 	return newLogsConnector(ctx, params.Logger, cfg, nextConsumer)
 }
 
-// createLogsToTraces defines the consumer type of the connector
-// We want to consume logs and export logs, therefore, define nextConsumer as logs, since consumer is the next component in the pipeline
+// createTracesConnector defines the consumer type of the connector
+// We want to consume logs and export traces, therefore, define nextConsumer as traces, since consumer is the next component in the pipeline
 func createTracesConnector(
 	ctx context.Context,
 	params connector.CreateSettings,
@@ -50,8 +50,8 @@ func createTracesConnector(
 	return newTracesConnector(ctx, params.Logger, cfg, nextConsumer)
 }
 
-// createLogsToTraces defines the consumer type of the connector
-// We want to consume logs and export logs, therefore, define nextConsumer as logs, since consumer is the next component in the pipeline
+// createMetricsConnector defines the consumer type of the connector
+// We want to consume logs and export metrics, therefore, define nextConsumer as metrics, since consumer is the next component in the pipeline
 func createMetricsConnector(
 	ctx context.Context,
 	params connector.CreateSettings,

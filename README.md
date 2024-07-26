@@ -1,5 +1,7 @@
 ### otlpjsonconnector
 
+*Note*: This component has been upstreamed. Can be found at https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/otlpjsonconnector.
+
 This connector receives log records from a pipeline which contain `otlpjson` in their Body fields
 and parse the `otlpjson` extracting Logs, Metrics and Traces according to the content.
 
